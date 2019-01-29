@@ -1,7 +1,28 @@
 import React from 'react';
+import SplitText from 'react-pose-text';
 
 const Todo = props => {
-	return <div onClick={props.toggleCompleted}>{props.todo.task}</div>;
+	const charPoses = {
+		exit: { opacity: 0, y: 20 },
+		enter: {
+			opacity: 1,
+			y: 0,
+			delay: ({ charIndex }) => charIndex * 20,
+		},
+	};
+
+	return (
+		<div className="todo">
+			<SplitText
+				className={props.todo.completed ? 'complete' : null}
+				onClick={props.toggleCompleted}
+				initialPose="exit"
+				pose="enter"
+				charPoses={charPoses}>
+				{props.todo.task}
+			</SplitText>
+		</div>
+	);
 };
 
 export default Todo;

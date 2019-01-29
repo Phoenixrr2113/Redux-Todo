@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
+import SplitText from 'react-pose-text';
 
 import TodoList from './components/TodoList';
-import './App.css';
 import TodoForm from './components/TodoForm';
 
 class App extends Component {
 	render() {
+		const charPoses = {
+			exit: { opacity: 0, y: 20 },
+			enter: {
+				opacity: 1,
+				y: 0,
+				delay: ({ charIndex }) => charIndex * 90,
+			},
+		};
 		return (
-			<div className="App">
-				<Route path="/" component={TodoList} />
-				<Route path="/newtodo" component={TodoForm} />
+			<div className="app">
+				<header className="title">
+					<h1>
+						<SplitText initialPose="exit" pose="enter" charPoses={charPoses}>
+							TO-DO LIST
+						</SplitText>
+					</h1>
+				</header>
+				<TodoForm />
+				<TodoList />
 			</div>
 		);
 	}
