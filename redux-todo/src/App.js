@@ -5,6 +5,8 @@ import SplitText from 'react-pose-text';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 
+import './styles/css/index.css';
+
 class App extends Component {
 	render() {
 		const charPoses = {

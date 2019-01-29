@@ -1,15 +1,10 @@
 import React from 'react';
 import Todo from './Todo';
-import { deleteCompleted, toggleCompleted } from '../actions';
+import { toggleCompleted } from '../actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const TodoList = props => {
-	const deleteCompleted = event => {
-		event.preventDefault();
-		props.deleteCompleted();
-	};
-
 	return (
 		<div className="todo-list">
 			{props.todoList.map(todo => {
@@ -22,7 +17,6 @@ const TodoList = props => {
 					</Link>
 				);
 			})}
-			<button onClick={deleteCompleted}>clear completed</button>
 		</div>
 	);
 };
@@ -35,5 +29,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ deleteCompleted, toggleCompleted },
+	{ toggleCompleted },
 )(TodoList);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import posed from 'react-pose';
 
 import { connect } from 'react-redux';
-import { addTodo } from '../actions';
+import { deleteCompleted, addTodo } from '../actions';
 
 class TodoForm extends Component {
 	state = {
@@ -21,6 +21,11 @@ class TodoForm extends Component {
 		});
 	};
 
+	deleteCompleted = event => {
+		event.preventDefault();
+		this.props.deleteCompleted();
+	};
+
 	render() {
 		const Box = posed.div({
 			hoverable: true,
@@ -29,7 +34,7 @@ class TodoForm extends Component {
 				scale: 1,
 			},
 			hover: {
-				scale: 1.3,
+				scale: 1.2,
 			},
 			press: {
 				scale: 1.1,
@@ -42,14 +47,14 @@ class TodoForm extends Component {
 				scale: 1,
 			},
 			hover: {
-				scale: 1.3,
+				scale: 1,
 			},
 			press: {
 				scale: 1.1,
 			},
 		});
 		return (
-			<form className="todo-form">
+			<form className="todo-form" onSubmit={e => e.preventDefault()}>
 				<input
 					className="todo-input"
 					type="text"
@@ -57,20 +62,20 @@ class TodoForm extends Component {
 					value={this.state.newTodo}
 					onChange={this.handleInputChange}
 					placeholder="Enter Task"
+					required
+					minLength="6"
 				/>
 				<div className="buttons">
 					<Box>
 						<button className="add-btn" onClick={this.addNewTodo}>
-							<Button>Add</Button>
+							<Button> Add </Button>
 						</button>
 					</Box>
-					{/* <Box>
-						<button
-							className="clear-complete"
-							onClick={this.props.clearCompleted}>
-							<Button>Clear Completed</Button>
+					<Box>
+						<button className="clear-complete" onClick={this.deleteCompleted}>
+							clear
 						</button>
-					</Box> */}
+					</Box>
 				</div>
 			</form>
 		);
@@ -85,5 +90,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ addTodo },
+	{ addTodo, deleteCompleted },
 )(TodoForm);
