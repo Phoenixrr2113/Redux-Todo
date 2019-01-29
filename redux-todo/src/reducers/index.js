@@ -1,4 +1,4 @@
-import { ADD_TODO } from '../actions';
+import { ADD_TODO, DELETE_COMPLETED, TOGGLE_COMPLETED } from '../actions';
 
 const initialState = {
 	todoList: [
@@ -8,7 +8,6 @@ const initialState = {
 			completed: false,
 		},
 	],
-	todo: null,
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -17,6 +16,28 @@ const todoReducer = (state = initialState, action) => {
 			return {
 				...state,
 				todoList: [...state.todoList, action.payload],
+			};
+		case TOGGLE_COMPLETED:
+			return {
+				...state,
+				todoList: state.todoList.map(todo =>
+					todo.id === action.payload
+						? { ...todo, completed: !todo.completed }
+						: todo,
+				),
+			};
+		// case DELETE_COMPLETED:
+		// 	return {
+		// 		...state,
+		// 		todoList: state.todoList.filter(todo => {
+		// 			return todo.id !== action.payload;
+		// 		}),
+		// 	};
+
+		case DELETE_COMPLETED:
+			return {
+				...state,
+				todoList: state.todoList.filter(todo => todo.completed !== true),
 			};
 
 		default:

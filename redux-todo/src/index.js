@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-import { createStore } from 'redux';
+import { logger } from 'redux-logger';
+import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 
-const store = createStore(rootReducer);
+const composeEnhancers =
+	typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+		: compose;
+
+const middlewareList = [logger];
+
+const enhancer = composeEnhancers(applyMiddleware(...middlewareList));
+
+const store = createStore(rootReducer, enhancer);
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
