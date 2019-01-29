@@ -2,6 +2,7 @@ import React from 'react';
 import Todo from './Todo';
 import { deleteCompleted, toggleCompleted } from '../actions';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const TodoList = props => {
 	const deleteCompleted = event => {
@@ -13,11 +14,12 @@ const TodoList = props => {
 		<div>
 			{props.todoList.map(todo => {
 				return (
-					<Todo
-						key={todo.id}
-						toggleCompleted={() => props.toggleCompleted(todo.id)}
-						todo={todo}
-					/>
+					<Link key={todo.id} to={`/todo/${todo.id}`}>
+						<Todo
+							toggleCompleted={() => props.toggleCompleted(todo.id)}
+							todo={todo}
+						/>
+					</Link>
 				);
 			})}
 			<button onClick={deleteCompleted}>clear completed</button>

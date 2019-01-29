@@ -26,14 +26,6 @@ const todoReducer = (state = initialState, action) => {
 						: todo,
 				),
 			};
-		// case DELETE_COMPLETED:
-		// 	return {
-		// 		...state,
-		// 		todoList: state.todoList.filter(todo => {
-		// 			return todo.id !== action.payload;
-		// 		}),
-		// 	};
-
 		case DELETE_COMPLETED:
 			return {
 				...state,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 import TodoList from './components/TodoList';
 import './App.css';
@@ -8,8 +9,8 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<TodoList />
-				<TodoForm />
+				<Route path="/" component={TodoList} />
+				<Route path="/newtodo" component={TodoForm} />
 			</div>
 		);
 	}
