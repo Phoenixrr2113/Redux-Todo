@@ -40,19 +40,6 @@ class TodoForm extends Component {
 				scale: 1.1,
 			},
 		});
-		const Button = posed.div({
-			hoverable: true,
-			pressable: true,
-			init: {
-				scale: 1,
-			},
-			hover: {
-				scale: 1,
-			},
-			press: {
-				scale: 1.1,
-			},
-		});
 		return (
 			<form className="todo-form" onSubmit={e => e.preventDefault()}>
 				<input
@@ -66,12 +53,12 @@ class TodoForm extends Component {
 					minLength="6"
 				/>
 				<div className="buttons">
-					<Box>
+					<Box initialPose="exit" pose="enter">
 						<button className="add-btn" onClick={this.addNewTodo}>
-							<Button> Add </Button>
+							Add
 						</button>
 					</Box>
-					<Box>
+					<Box initialPose="exit" pose="enter">
 						<button className="clear-complete" onClick={this.deleteCompleted}>
 							clear
 						</button>

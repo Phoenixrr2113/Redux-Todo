@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Route } from 'react-router-dom';
 import SplitText from 'react-pose-text';
 
 import TodoList from './components/TodoList';
@@ -14,7 +13,7 @@ class App extends Component {
 			enter: {
 				opacity: 1,
 				y: 0,
-				delay: ({ charIndex }) => charIndex * 90,
+				delay: ({ charIndex }) => charIndex * 200,
 			},
 		};
 		return (
